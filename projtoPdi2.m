@@ -59,7 +59,7 @@ for i=1:length(reg)
                 break;
             end
         end
-        %se não for uma laranja é uma laranja
+        %se não for uma maca é uma laranja
         if maca == false && circularities(i) < 1.900
         text(reg(i).Centroid(1),reg(i).Centroid(2),'laranja','Color','r');
         end
