@@ -1,7 +1,7 @@
 clear all
 close all
 
-img = imread('20190525_174326.jpg');
+img = imread('20190525_175206.jpg');
 figure,imshow(img);
 
 %segmentacao
@@ -40,7 +40,7 @@ for i=1:length(reg)
         rectangle('Position',[thisboundingbox(1),thisboundingbox(2),thisboundingbox(3),thisboundingbox(4)],'EdgeColor','r','LineWidth',2);
         text(reg(i).Centroid(1), reg(i).Centroid(2),'Melancia','Color','r');
     end
-    if(reg(i).Area < 120000 && reg(i).Area > 65000)
+    if(reg(i).Area < 120000 && reg(i).Area > 65000 && (reg(i).MajorAxisLength / 2) < reg(i).MinorAxisLength)
         rectangle('Position',[thisboundingbox(1),thisboundingbox(2),thisboundingbox(3),thisboundingbox(4)],'EdgeColor','r','LineWidth',2);
         %text(reg(i).Centroid(1),reg(i).Centroid(2),'laranja','Color','r');
         copia = img;
@@ -49,7 +49,7 @@ for i=1:length(reg)
         maca = false;
         for x=1: size(imCrop,1)
             for y=1 :size(imCrop,2)
-                if imCrop(x,y,1) > 160 && imCrop(x,y,2) < 126 && imCrop(x,y,3) < 126
+                if imCrop(x,y,1) > 165 && imCrop(x,y,2) < 126 && imCrop(x,y,3) < 126
                 text(reg(i).Centroid(1),reg(i).Centroid(2),'maca','Color','r');
                 maca = true;
                 break;    
@@ -60,13 +60,13 @@ for i=1:length(reg)
             end
         end
         %se não for uma maca é uma laranja
-        if maca == false && circularities(i) < 1.900
+        if maca == false && circularities(i) < 2.300
         text(reg(i).Centroid(1),reg(i).Centroid(2),'laranja','Color','r');
         end
     end
     
     %verifica se é um limao
-    if(reg(i).Area < 65000 && reg(i).Area > 20000 && circularities(i) < 2.000)
+    if(reg(i).Area < 65000 && reg(i).Area > 20000 && circularities(i) < 2.200)
         rectangle('Position',[thisboundingbox(1),thisboundingbox(2),thisboundingbox(3),thisboundingbox(4)],'EdgeColor','r','LineWidth',2);
         text(reg(i).Centroid(1),reg(i).Centroid(2),'limao','Color','r');
     end
